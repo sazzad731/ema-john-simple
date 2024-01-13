@@ -1,7 +1,9 @@
 .card-container {
     background: rgba(255, 153, 0, 0.3);
     padding: 28px 23px;
-    height: 944px;
+    height: 873px;
+    position: sticky;
+    top: 80px;
 }
 
 .card-container h6 {
