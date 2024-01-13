@@ -1,44 +1,56 @@
-// use local storage to manage cart data
+// use local storage to manage card data
 const addToDb = id => {
-    let shoppingCart = getShoppingCart();
+    let shoppingCard = getShoppingCard();
     // add quantity
-    const quantity = shoppingCart[id];
+    const quantity = shoppingCard[id];
     if (!quantity) {
-        shoppingCart[id] = 1;
+        shoppingCard[id] = 1;
     }
     else {
         const newQuantity = quantity + 1;
-        shoppingCart[id] = newQuantity;
+        shoppingCard[id] = newQuantity;
     }
-    localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+    localStorage.setItem('shopping-card', JSON.stringify(shoppingCard));
+}
+
+const getStoredCard = ()=>{
+    let shoppingCard = {};
+
+    //get the shopping card from local storage
+    const storedCard = localStorage.getItem('shopping-card');
+    if (storedCard) {
+        shoppingCard = JSON.parse(storedCard);
+    }
+    return shoppingCard;
 }
 
 const removeFromDb = id => {
-    const shoppingCart = getShoppingCart();
-    if (id in shoppingCart) {
-        delete shoppingCart[id];
-        localStorage.setItem('shopping-cart', JSON.stringify(shoppingCart));
+    const shoppingCard = getShoppingCard();
+    if (id in shoppingCard) {
+        delete shoppingCard[id];
+        localStorage.setItem('shopping-card', JSON.stringify(shoppingCard));
     }
 }
 
-const getShoppingCart = () => {
-    let shoppingCart = {};
+const getShoppingCard = () => {
+    let shoppingCard = {};
 
-    //get the shopping cart from local storage
-    const storedCart = localStorage.getItem('shopping-cart');
-    if (storedCart) {
-        shoppingCart = JSON.parse(storedCart);
+    //get the shopping card from local storage
+    const storedCard = localStorage.getItem('shopping-card');
+    if (storedCard) {
+        shoppingCard = JSON.parse(storedCard);
     }
-    return shoppingCart;
+    return shoppingCard;
 }
 
-const deleteShoppingCart = () => {
-    localStorage.removeItem('shopping-cart');
+const deleteShoppingCard = () => {
+    localStorage.removeItem('shopping-card');
 }
 
 export {
     addToDb,
+    getStoredCard,
     removeFromDb,
-    getShoppingCart,
-    deleteShoppingCart
+    getShoppingCard,
+    deleteShoppingCard
 }
