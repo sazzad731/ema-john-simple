@@ -1,0 +1,37 @@
+.review-item{
+  display: flex;
+  width: 571px;
+  align-items: center;
+  margin-bottom: 21px;
+  border: 2px solid #95A0A7;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.review-item > img{
+  width: 91px;
+  margin-right: 10px;
+  border-radius: 8px;
+}
+
+.review-item .item-info{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.review-item .item-info .item-content > p > span{
+  color: orange;
+}
+
+.review-item .item-info > button{
+  width: 55px;
+  height: 55px;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 25px;
+  color: #EB5757;
+  background: rgba(235, 87, 87, 0.3);
+}

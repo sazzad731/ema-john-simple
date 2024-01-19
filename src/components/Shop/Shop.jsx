@@ -3,17 +3,24 @@ import './Shop.css'
 import { useEffect } from 'react';
 import Product from './Product/Product';
 import Card from './Card/Card';
-import { addToDb, getStoredCard } from '../../utilities/fakedb';
+import {
+  addToDb,
+  getStoredCard,
+  deleteShoppingCard,
+} from "../../utilities/fakedb";
+import { useLoaderData } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    const products = useLoaderData();
     const [cards, setCards] = useState([])
 
-    useEffect(()=>{
-        fetch("products.json")
-        .then(res=>res.json())
-        .then(data=>setProducts(data))
-    }, [])
+    const clearCard = ()=>{
+        setCards([])
+        deleteShoppingCard()
+    }
 
     useEffect(()=>{
         const storedCard = getStoredCard();
@@ -27,7 +34,7 @@ const Shop = () => {
             }
         }
         setCards(savedCard)
-    }, [products, cards])
+    }, [products])
 
     const addToCard = (selectedProduct)=>{
         let newCard = [];
@@ -48,14 +55,19 @@ const Shop = () => {
 
 
     return (
-        <div className='shop-container'>
-            <div className="shoping-container">
-                {
-                    products.map(product => <Product addToCard={addToCard} product={product} key={product.id}/>)
-                }
-            </div>
-            <Card cards={cards}/>
+      <div className="shop-container">
+        <div className="shoping-container">
+          {products.map((product) => (
+            <Product addToCard={addToCard} product={product} key={product.id} />
+          ))}
         </div>
+        <Card clearCard={clearCard} cards={cards}>
+          <Link className="btn-2" to="/order-review">
+            <span className="btn-text">Review Order</span>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </Link>
+        </Card>
+      </div>
     );
 };
 
