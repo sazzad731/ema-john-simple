@@ -11,7 +11,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/orders",
-        loader: () => fetch("products.json"),
         element: <Shop />,
       },
       {

@@ -10,7 +10,7 @@ const OrderReview = () =>{
   const { initialCard } = useLoaderData()
   const [ cards, setCards ] = useState(initialCard)
   const handleRemoveItem = (id) =>{
-    const remaining = cards.filter(product => product.id !== id);
+    const remaining = cards.filter(product => product._id !== id);
     setCards(remaining);
     removeFromDb(id);
   }
@@ -27,7 +27,7 @@ const OrderReview = () =>{
           <ReviewItem
             product={product}
             handleRemoveItem={handleRemoveItem}
-            key={product.id}
+            key={product._id}
           />
         ))}
       </div>
